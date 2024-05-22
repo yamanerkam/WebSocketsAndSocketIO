@@ -1,7 +1,13 @@
-import { createServer } from 'http'
+import express from 'express'
 import { Server } from 'socket.io'
 
+const PORT = process.env.PORT || 3500
 
+const app = express()
+
+const expressServer = app.listen(PORT, () => {
+    console.log(`listening on port ${PORT}`)
+})
 
 const httpServer = createServer()
 const io = new Server(httpServer, {
@@ -19,4 +25,3 @@ io.on('connection', socket => {
     })
 })
 
-httpServer.listen(3500, () => console.log('listening to 3500'))
